@@ -1,75 +1,38 @@
 # djcra
 Django :heart: create-react-app integration example
 
-## how to run project
+## cdn demo
 
-### In frontend development mode:
-* set `FRONTEND_DEV = True` in `settings.py`
-* run servers
-```
-$ REACT_APP_PUBLIC_URL=http://localhost:3000 npm start
-$ python manage.py runserver
-```
-* open `http://localhost:8000`
+we use `http://localhost:8080` as our cdn in this example
 
-### In backend-only development mode:
-* set `FRONTEND_DEV = False` in `settings.py`
-* build static files
-* run python server
-```
-$ npm run build
-$ python manage.py runserver
-```
-* open `http://localhost:8000`
+## how to run cdn example
 
-### In production mode
-* set `FRONTEND_DEV = False` in `settings.py`
-* build static files
-* collect static files
+* we updated `STATIC_URL` and `FRONTEND_DEV` in `settings.py` file. 
 ```
-$ npm run build
-$ python manage.py collectstatic
-```
-* deploy your django project [mdn guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment)
-
-### In production with cdn
-* update `STATIC_URL` and `FRONTEND_DEV` in `settings.py` file. 
-```
-STATIC_URL = 'http://cdn.mysite.com/static/'
+STATIC_URL = 'http://localhost:8080/static/'
 FRONTEND_DEV = False
 ```
 * build static file
 ```
-REACT_APP_PUBLIC_URL=http://cdn.mysite.com npm run build
+REACT_APP_PUBLIC_URL=http://localhost:8080 npm run build
 ```
-you can see [cdn branch](https://github.com/smmoosavi/djcra/tree/cdn) of this repo for more detail.
+run servers 
 
-## the :broken_heart: parts
-problems that need your help.
-
-### hot reload problem
-`http://localhost:8000/sockjs-node/` not found in django.
-
-### images problem
-CRA assets starts with `/static/`. so we need add `http://localhost:3000` before them.
-```jsx
-import logo from './logo.svg';
-console.log(logo); // "/static/media/logo.5d5d9eef.svg"
-<img src={(process.env.REACT_APP_PUBLIC_URL || '') + logo} alt="logo" />
 ```
-
-## what happen until now
-
-create react app named `cra-prj`
+$ python manage.py runserver
+$ http-server build
 ```
-$ create-react-app cra-prj
-```
+I use [http-server](https://www.npmjs.com/package/http-server) as  cdn server in this demo 
 
-create django project named djcra
-```
-$ django-admin startproject djcra
-$ mv djcra django_prj
-echo 'Django==1.10.5' > django_prj/requirements.txt
-```
 
-I add some files to projects
+### logs
+http-server:
+```
+[Thu Mar 02 2017 17:44:25 GMT+0330 (IRST)] "GET /static/css/main.9a0fe4f1.css" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+[Thu Mar 02 2017 17:44:25 GMT+0330 (IRST)] "GET /static/js/main.1f1f0e76.js" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+[Thu Mar 02 2017 17:44:25 GMT+0330 (IRST)] "GET /static/media/logo.5d5d9eef.svg" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36"
+```
+django log:
+```
+[02/Mar/2017 14:14:25] "GET / HTTP/1.1" 200 467
+```

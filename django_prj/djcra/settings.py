@@ -121,9 +121,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'http://localhost:8080/static/'
 
-FRONTEND_DEV = True
+FRONTEND_DEV = False
 FRONTEND_BUILD_ROOT = os.path.join(BASE_DIR, '../cra-prj/build')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
