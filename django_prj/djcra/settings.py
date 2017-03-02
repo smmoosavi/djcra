@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from .settings_helpers import load_static_asset_manifest
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'pages',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pages.context_processors.static',
             ],
         },
     },
@@ -119,3 +122,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+FRONTEND_DEV = True
+FRONTEND_BUILD_ROOT = os.path.join(BASE_DIR, '../cra-prj/build')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+if not FRONTEND_DEV:
+    STATICFILES_DIRS += [os.path.join(FRONTEND_BUILD_ROOT, 'static')]
+STATIC_ASSET_MANIFEST = load_static_asset_manifest(FRONTEND_BUILD_ROOT, FRONTEND_DEV)
