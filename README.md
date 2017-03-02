@@ -10,6 +10,7 @@ Django :heart: create-react-app integration example
 $ REACT_APP_PUBLIC_URL=http://localhost:3000 npm start
 $ python manage.py runserver
 ```
+* open `http://localhost:8000`
 
 ### In backend-only development mode:
 * set `FRONTEND_DEV = False` in `settings.py`
@@ -19,6 +20,8 @@ $ python manage.py runserver
 $ npm run build
 $ python manage.py runserver
 ```
+* open `http://localhost:8000`
+
 ### In production mode
 * set `FRONTEND_DEV = False` in `settings.py`
 * build static files
@@ -39,6 +42,7 @@ FRONTEND_DEV = False
 ```
 REACT_APP_PUBLIC_URL=http://cdn.mysite.com npm run build
 ```
+you can see [cdn branch](https://github.com/smmoosavi/djcra/tree/cdn) of this repo for more detail.
 
 ## the :broken_heart: parts
 problems that need your help.
