@@ -47,6 +47,12 @@ you can see [cdn branch](https://github.com/smmoosavi/djcra/tree/cdn) of this re
 ## the :broken_heart: parts
 problems that need your help.
 
+I hope I see solution in next CRA version with running 
+
+```
+PUBLIC_URL=http://localhost:3000 npm run start
+```
+
 ### hot reload problem
 `http://localhost:8000/sockjs-node/` not found in django.
 
